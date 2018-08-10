@@ -1,0 +1,12 @@
+- Build tensorflow from source in order to activate SSE4.2 instruction set?
+bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
+
+- Build the wheel
+bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
+
+- Install the wheel
+sudo pip3 install /tmp/tensorflow_pkg/tensorflow-*.whl
+
+- for GPU wheels you may required this
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64/:/usr/local/cuDNN/lib64
+
