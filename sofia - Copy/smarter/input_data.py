@@ -107,7 +107,6 @@ class DataSet(object):
     """Return the next `batch_size` examples from this data set."""
     start = self._index_in_epoch
     self._index_in_epoch += batch_size
-	end = self._num_examples
     if self._index_in_epoch > self._num_examples:
       # Finished epoch
       self._epochs_completed += 1
