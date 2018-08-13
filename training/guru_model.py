@@ -1,12 +1,7 @@
 import tensorflow as tf
 import numpy as np
+import parameters as param
 slim = tf.contrib.slim
-
-featuresSize = 18
-labelsSize = 2
-batch_size = 1000
-learning_rate = 0.01
-logs_dir = './'
 
 class DataSet(object):
     def __init__(self, features, labels):
@@ -117,7 +112,7 @@ def loss(logits, labels):
 def training(loss):
     with tf.name_scope('train'):
         # Create the gradient descent optimizer with the given learning rate.
-        optimizer = tf.train.AdamOptimizer(learning_rate)
+        optimizer = tf.train.AdamOptimizer(param.learning_rate)
         # Create a variable to track the global step.
         #global_step = tf.Variable(0, name='global_step', trainable=False)
         # Use the optimizer to apply the gradients that minimize the loss
@@ -143,7 +138,7 @@ def evaluation_stats(logits, labels):
 def do_eval(sess, eval_correct, features_placeholder, labels_placeholder, test_features, test_labels):
     # And run one epoch of eval.
     true_count = 0  # Counts the number of correct predictions.
-
+    batch_size = param.batch_size
     steps_per_epoch = len(test_features) // batch_size
     num_examples = steps_per_epoch * batch_size
     print('Batch size is ', batch_size, 'Steps per epoch are ', steps_per_epoch, 'Samples: ', num_examples)
@@ -161,26 +156,4 @@ def set_model():
     # Config to turn on JIT compilation
     tfconfig = tf.ConfigProto()
     sess = tf.Session(config=tfconfig)
-    tfconfig.graph_options.optimizer_options.global_jit_level = tf.OptimizerOptions.ON_1
-    # Creates a variable to hold the global_step.
-    global_step_tensor = tf.Variable(0, trainable=False, name='global_step')
-    # Placeholders
-    features_placeholder = tf.placeholder(tf.float32, None)
-    labels_placeholder = tf.placeholder(tf.float32, None)
-    # Build a Graph that computes predictions from the inference model.
-    logits = inference(features_placeholder)
-    # Add to the Graph the Ops for loss calculation.
-    loss_op = loss(logits, labels_placeholder)
-    # Add to the Graph the Ops that calculate and apply gradients.
-    train_op = training(loss_op)
-    # Add the Op to compare the logits to the labels during evaluation on the complete test set
-    eval_op = evaluation_stats(logits, labels_placeholder, 1)
-    # Build the summary operation based on the TF collection of Summaries.
-    summary_op = tf.summary.merge_all()
-    # Create a saver for writing training checkpoints.
-    saver = tf.train.Saver(sharded=True)
-    # Run the Op to initialize the variables.
-    tf.global_variables_initializer().run(session=sess)
-    # Instantiate a SummaryWriter to output summaries and the Graph.
-    summary_writer = tf.summary.FileWriter('', sess.graph)
     return sess
