@@ -1,6 +1,7 @@
 import argparse
+import tensorflow as tf
 
-def run(_):
+def main(_):
     print("Fire Guru - Run started")
     parser = argparse.ArgumentParser(description='Process arguments.')
     parser.add_argument('-a', help='Which action? (Train or Prepare Data)', 
@@ -14,7 +15,7 @@ def run(_):
         from data_prep import process_data as data
         data.run_data_process()
 
-if __name__ == '__run__':
-    print("Ups")
+if __name__ == '__main__':
+    tf.app.run()
 
 
