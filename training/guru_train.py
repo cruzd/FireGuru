@@ -36,7 +36,7 @@ def run_training():
     # Run the Op to initialize the variables.
     tf.global_variables_initializer().run(session=sess)
     # Instantiate a SummaryWriter to output summaries and the Graph.
-    summary_writer = tf.summary.FileWriter('', sess.graph)
+    summary_writer = tf.summary.FileWriter(param.logs_dir, sess.graph)
 
     ckpt = tf.train.get_checkpoint_state(param.logs_dir)
     if ckpt and ckpt.model_checkpoint_path:
