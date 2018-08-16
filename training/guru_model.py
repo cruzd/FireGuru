@@ -1,6 +1,6 @@
 import tensorflow as tf
 import numpy as np
-import parameters as param
+from training import parameters as param
 slim = tf.contrib.slim
 
 class DataSet(object):

@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
-import parameters as param
-import guru_model as model
+from training import parameters as param
+from training import guru_model as model
 from six.moves import xrange  # pylint: disable=redefined-builtin
 import time
 
