@@ -1,6 +1,6 @@
 import argparse
 
-def main(_):
+def run(_):
     print("Fire Guru - Run started")
     parser = argparse.ArgumentParser(description='Process arguments.')
     parser.add_argument('-a', help='Which action? (Train or Prepare Data)', 
@@ -13,5 +13,8 @@ def main(_):
     if args.a == 'data':
         from data_prep import process_data as data
         data.run_data_process()
+
+if __name__ == '__run__':
+    print("Ups")
 
 
