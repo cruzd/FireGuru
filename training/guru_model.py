@@ -149,11 +149,3 @@ def do_eval(sess, eval_correct, features_placeholder, labels_placeholder, test_f
     precision = true_count / num_examples
 
     print('  Num examples: %d  Num correct: %d  Precision @ 1: %0.04f' % (num_examples, true_count, precision))
-
-
-
-def set_model():
-    # Config to turn on JIT compilation
-    tfconfig = tf.ConfigProto()
-    sess = tf.Session(config=tfconfig)
-    return sess

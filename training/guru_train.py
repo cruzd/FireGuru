@@ -60,9 +60,9 @@ def run_training():
         feed_dict = model.fill_feed_dict(features_feed, labels_feed,
                                 features_placeholder, labels_placeholder)
         metrics, __, loss_value, summary_str = sess.run([eval_op, train_op, loss_op, summary_op], feed_dict=feed_dict)
-        accuracy = sess.run(metrics[0], feed_dict=feed_dict) #accuracy
-        recall = sess.run(metrics[1], feed_dict=feed_dict) #recall
-        precision = sess.run(metrics[2], feed_dict=feed_dict) #precision
+        #accuracy = sess.run(metrics[0], feed_dict=feed_dict) #accuracy
+        #recall = sess.run(metrics[1], feed_dict=feed_dict) #recall
+        #precision = sess.run(metrics[2], feed_dict=feed_dict) #precision
         # Write the summaries and print an overview fairly often.
         if step % 100 == 0:
             # Print status to stdout.
@@ -72,6 +72,6 @@ def run_training():
         # Save a checkpoint and evaluate the model periodically.
         if (step + 1) % 1000 == 0 or (step + 1) == max_steps:
             print('Step %d: loss = %.2f (%.3f sec)' % (global_step, loss_value, duration))
-            print('Accuracy = %.3f; Recall = %.3f; Precision = %.3f' % (accuracy, recall, precision))
+            print('Accuracy = %.3f; Recall = %.3f; Precision = %.3f' % (metrics[0], metrics[1], metrics[2]))
             sess.run(global_step_tensor.assign(global_step))
             saver.save(sess, param.logs_dir + 'model.ckpt', global_step=global_step)
