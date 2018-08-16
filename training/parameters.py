@@ -4,4 +4,4 @@ batch_size = 1000
 learning_rate = 0.01
 logs_dir = './logs'
 max_steps = 15000000
-filename = '../data/fine/teste.txt'
+filename = './data/fine/teste.txt'
