@@ -1,6 +1,0 @@
-include LICENSE
-include README.rst
-include test.sh
-include train.sh
-recursive-include smarter/docs *
-recursive-include smarter/sessions *
