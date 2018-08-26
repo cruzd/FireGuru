@@ -5,9 +5,12 @@ from training import guru_model as model
 from six.moves import xrange  # pylint: disable=redefined-builtin
 import time
 
-def run_training():
-
-    data = np.loadtxt(open(param.filename, "rb"), delimiter=",", dtype='float32')
+def run_training(file):
+    if(file=='pessimist'):
+        filename=param.pessimist_filename
+    if(file=='real'):
+        filename=param.real_filename
+    data = np.loadtxt(open(filename, "rb"), delimiter=",", dtype='float32')
     data_sets = model.DataSets()
     data_sets.train = model.DataSet(data[:,0:param.features_size], 
     data[:,param.features_size:param.features_size+param.labels_size])

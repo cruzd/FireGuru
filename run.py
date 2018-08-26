@@ -11,8 +11,12 @@ def main(_):
     args = parser.parse_args()
 
     if args.a == 'train':
+        if args.m == 'pessimist':
+            file='pessimist'
+        if args.m == 'real':
+            file='real'
         from training import guru_train as train
-        train.run_training()
+        train.run_training(file)
     if args.a == 'data':
         if args.m == 'pessimist':
             from data_prep import pessimist_data as data

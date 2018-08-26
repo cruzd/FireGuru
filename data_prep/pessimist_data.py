@@ -7,7 +7,7 @@ from training import parameters as param
 
 def processData():
     trainMatrix = []
-    real_data = genfromtxt(param.filename, delimiter=',')
+    real_data = genfromtxt(param.real_filename, delimiter=',')
     for row in real_data:
         if(row[param.features_size+param.labels_size-1]==1):
             trainMatrix.append(row)
@@ -20,4 +20,4 @@ def processData():
             num_nega_values = num_nega_values + 1
         i = i + 1
     trainMatrix = np.array(trainMatrix)
-    np.savetxt('testeEquil.csv', trainMatrix, delimiter=',', fmt="%d")
+    np.savetxt(param.pessimist_filename, trainMatrix, delimiter=',', fmt="%d")
