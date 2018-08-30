@@ -5,7 +5,7 @@ from numpy import genfromtxt
 import pandas as pd 
 from training import parameters as param
 
-def processData():
+def run_data_process():
     trainMatrix = []
     real_data = genfromtxt(param.real_filename, delimiter=',')
     for row in real_data:
