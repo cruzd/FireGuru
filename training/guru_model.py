@@ -102,8 +102,8 @@ def inference(features):
 
 def loss(logits, labels):
     with tf.name_scope('cross_entropy'):
-        diff = tf.nn.weighted_cross_entropy_with_logits(logits=logits, targets=labels, pos_weight=10000)
-        #diff = tf.nn.softmax_cross_entropy_with_logits_v2(logits=logits, labels=labels)
+        #diff = tf.nn.weighted_cross_entropy_with_logits(logits=logits, targets=labels, pos_weight=10000)
+        diff = tf.nn.softmax_cross_entropy_with_logits_v2(logits=logits, labels=labels)
         with tf.name_scope('total'):
             cross_entropy = tf.reduce_mean(diff)
     tf.summary.scalar('cross_entropy', cross_entropy)
