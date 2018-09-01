@@ -49,12 +49,12 @@ def run_training(file):
         print('Resuming from step ', offset_step)
     else:
         print('No checkpoint found... will train from scratch')
+        sess.run(tf.local_variables_initializer())
+        sess.run(tf.global_variables_initializer())
         offset_step = 0
 
     # Start run loop
     max_steps = param.max_steps
-    sess.run(tf.local_variables_initializer())
-    sess.run(tf.global_variables_initializer())
     for step in xrange(max_steps):
         global_step = step + offset_step
         start_time = time.time()
