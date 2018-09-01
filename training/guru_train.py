@@ -46,7 +46,7 @@ def run_training(file):
         print('Checkpoint found! Will train from here')
         saver.restore(sess, ckpt.model_checkpoint_path)
         offset_step = sess.run(global_step_tensor)
-        sess.run(tf.initialize_all_variables())
+        sess.run(tf.global_variables_initializer())
         print('Resuming from step ', offset_step)
     else:
         print('No checkpoint found... will train from scratch')
