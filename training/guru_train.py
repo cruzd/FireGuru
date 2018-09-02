@@ -46,7 +46,7 @@ def run_training(file):
     ckpt = tf.train.get_checkpoint_state(param.logs_dir)
     if ckpt and ckpt.model_checkpoint_path:
         print('Checkpoint found! Will train from here')
-        sess.run(running_vars_initializer))
+        sess.run(running_vars_initializer)
         saver.restore(sess, ckpt.model_checkpoint_path)
         offset_step = sess.run(global_step_tensor)
         print('Resuming from step ', offset_step)
