@@ -127,9 +127,9 @@ def make_predictions(logits):
 
 def evaluation_stats(logits, labels):
     predictions = make_predictions(logits)
-    recall, recall_op = tf.metrics.recall(tf.argmax(labels,1), predictions)
-    precision, precision_op = tf.metrics.precision(tf.argmax(labels,1), predictions)
-    accuracy, accuracy_op = tf.metrics.accuracy(tf.argmax(labels,1), predictions)
+    recall, recall_op = tf.metrics.recall(tf.argmax(labels,1), predictions, name="my_metric")
+    precision, precision_op = tf.metrics.precision(tf.argmax(labels,1), predictions, name="my_metric")
+    accuracy, accuracy_op = tf.metrics.accuracy(tf.argmax(labels,1), predictions, name="my_metric")
     tf.summary.scalar('precision', precision_op*100)
     tf.summary.scalar('recall', recall_op*100)
     tf.summary.scalar('accuracy', accuracy_op*100)
@@ -149,3 +149,7 @@ def do_eval(sess, eval_correct, features_placeholder, labels_placeholder, test_f
     precision = true_count / num_examples
 
     print('  Num examples: %d  Num correct: %d  Precision @ 1: %0.04f' % (num_examples, true_count, precision))
+
+def initializeCustomVariables():
+    running_vars = tf.get_collection(tf.GraphKeys.LOCAL_VARIABLES, scope="my_metric")
+    return tf.variables_initializer(var_list=running_vars)
