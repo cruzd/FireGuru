@@ -37,7 +37,7 @@ def run_training(file):
     # Create a saver for writing training checkpoints.
     saver = tf.train.Saver(sharded=True)
     # Run the Op to initialize the variables.
-    tf.global_variables_initializer().run(session=sess)
+    #tf.global_variables_initializer().run(session=sess)
     # Instantiate a SummaryWriter to output summaries and the Graph.
     summary_writer = tf.summary.FileWriter(param.logs_dir, sess.graph)
     # Function to initialize custom variables after restore checkpoint
