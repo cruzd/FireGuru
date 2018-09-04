@@ -85,10 +85,10 @@ def run_training(file):
             tensor_info_x = utils.build_tensor_info(features_placeholder)
             tensor_info_y = utils.build_tensor_info(labels_placeholder)
             tf.saved_model.simple_save(sess,param.logs_dir + 'model_export', 
-                {"features": tensor_info_x, "binary_classif": tensor_info_y})
+                {"features": tensor_info_x}, {"binary_classif": tensor_info_y})
         # Export model and evaluate the model periodically.
         if (step + 1) == max_steps:
             tensor_info_x = utils.build_tensor_info(features_placeholder)
             tensor_info_y = utils.build_tensor_info(labels_placeholder)
             tf.saved_model.simple_save(sess,param.logs_dir + 'model_export', 
-                {"features": tensor_info_x, "binary_classif": tensor_info_y})
+                {"features": tensor_info_x}, {"binary_classif": tensor_info_y})
