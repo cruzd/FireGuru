@@ -3,6 +3,6 @@ labels_size = 2
 batch_size = 1000
 learning_rate = 0.01
 logs_dir = '/data/FireGuru/training/logs/'
-max_steps = 15000000
+max_steps = 150000
 real_filename = '/data/FireGuru/data/fine/teste.txt'
 pessimist_filename = '/data/FireGuru/data/fine/teste.txt'

@@ -1,6 +1,5 @@
 import tensorflow as tf
 import numpy as np
-from tensorflow.python.saved_model import utils
 from training import parameters as param
 from training import guru_model as model
 from six.moves import xrange  # pylint: disable=redefined-builtin
@@ -82,11 +81,7 @@ def run_training(file):
             print('Accuracy = %.3f; Recall = %.3f; Precision = %.3f' % (metrics[0], metrics[1], metrics[2]))
             sess.run(global_step_tensor.assign(global_step))
             saver.save(sess, param.logs_dir + 'model.ckpt', global_step=global_step)
-            tf.saved_model.simple_save(sess,param.logs_dir + 'model_export', 
-                {"features": features_placeholder}, {"binary_classif": labels_placeholder})
         # Export model and evaluate the model periodically.
         if (step + 1) == max_steps:
-            tensor_info_x = utils.build_tensor_info(features_placeholder)
-            tensor_info_y = utils.build_tensor_info(labels_placeholder)
             tf.saved_model.simple_save(sess,param.logs_dir + 'model_export', 
-                {"features": tensor_info_x}, {"binary_classif": tensor_info_y})
+                {"features": features_placeholder}, {"binary_classif": labels_placeholder})
