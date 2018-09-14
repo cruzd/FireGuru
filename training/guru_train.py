@@ -84,4 +84,4 @@ def run_training(file):
         # Export model and evaluate the model periodically.
         if (step + 1) == max_steps:
             tf.saved_model.simple_save(sess,param.logs_dir + 'model_export', 
-                {"features": features_placeholder}, {"binary_classif": labels_placeholder})
+                {"features": features_feed}, {"binary_classif": labels_feed})
