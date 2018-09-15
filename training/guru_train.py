@@ -76,7 +76,7 @@ def run_training(file):
             # Update the events file.
             summary_writer.add_summary(summary_str, global_step)
             tf.saved_model.simple_save(sess,param.logs_dir + 'model_export', 
-                {"features": features_feed}, {"binary_classif": labels_feed})
+                {"features": tf.convert_to_tensor(features_feed)}, {"binary_classif": tf.convert_to_tensor(labels_feed)})
         # Save a checkpoint and evaluate the model periodically.
         if (step + 1) % 1000 == 0 or (step + 1) == max_steps:
             print('Step %d: loss = %.2f (%.3f sec)' % (global_step, loss_value, duration))
@@ -86,4 +86,4 @@ def run_training(file):
         # Export model and evaluate the model periodically.
         if (step + 1) == max_steps:
             tf.saved_model.simple_save(sess,param.logs_dir + 'model_export', 
-                {"features": features_feed}, {"binary_classif": labels_feed})
+                {"features": tf.convert_to_tensor(features_feed)}, {"binary_classif": tf.convert_to_tensor(labels_feed)})
