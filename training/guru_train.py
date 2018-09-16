@@ -22,8 +22,8 @@ def run_training(file):
     # Creates a variable to hold the global_step.
     global_step_tensor = tf.Variable(0, trainable=False, name='global_step')
     # Placeholders
-    features_placeholder = tf.placeholder(tf.float32, None)
-    labels_placeholder = tf.placeholder(tf.float32, None)
+    features_placeholder = tf.placeholder(tf.float32, None, name="features")
+    labels_placeholder = tf.placeholder(tf.float32, None, name="binary_classif")
     # Build a Graph that computes predictions from the inference model.
     logits = model.inference(features_placeholder)
     # Add to the Graph the Ops for loss calculation.
@@ -77,6 +77,9 @@ def run_training(file):
             summary_writer.add_summary(summary_str, global_step)
         # Save a checkpoint and evaluate the model periodically.
         if (step + 1) % 1000 == 0 or (step + 1) == max_steps:
+            tf.saved_model.simple_save(sess,param.logs_dir + 'model_export', 
+                {"features": tf.placeholder(tf.float32, [None,18])}, 
+                {"binary_classif": tf.placeholder(tf.float32, [None, 2])})
             print('Step %d: loss = %.2f (%.3f sec)' % (global_step, loss_value, duration))
             print('Accuracy = %.3f; Recall = %.3f; Precision = %.3f' % (metrics[0], metrics[1], metrics[2]))
             sess.run(global_step_tensor.assign(global_step))
@@ -84,4 +87,5 @@ def run_training(file):
         # Export model and evaluate the model periodically.
         if (step + 1) == max_steps:
             tf.saved_model.simple_save(sess,param.logs_dir + 'model_export', 
-                {"features": tf.convert_to_tensor(features_feed)}, {"binary_classif": tf.convert_to_tensor(labels_feed)})
+                {"features": tf.placeholder(tf.float32, [None,18])}, 
+                {"binary_classif": tf.placeholder(tf.float32, [None, 2])})
