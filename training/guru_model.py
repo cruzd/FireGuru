@@ -78,7 +78,7 @@ def variable_summaries(var):
     tf.summary.scalar('min', tf.reduce_min(var))
     tf.summary.histogram('histogram', var)
 
-def nn_layer(input_tensor, input_dim, output_dim, layer_name, act=tf.nn.relu):
+def nn_layer(input_tensor, input_dim, output_dim, layer_name, act=tf.nn.relu, name):
     # Adding a name scope ensures logical grouping of the layers in the graph.
     with tf.name_scope(layer_name):
         # This Variable will hold the state of the weights for the layer
@@ -97,7 +97,8 @@ def nn_layer(input_tensor, input_dim, output_dim, layer_name, act=tf.nn.relu):
 
 def inference(features):
     layer_1 = nn_layer(features, get_num_features(), get_num_hidden1(), 'layer1', act=tf.nn.relu)
-    logits = nn_layer(layer_1, get_num_hidden1(), get_num_classes(), 'out', act=tf.identity, name="logits")
+    logits = nn_layer(layer_1, get_num_hidden1(), get_num_classes(), 'out', act=tf.identity)
+    logits = tf.identity(logits, name='logits')
     return logits
 
 def loss(logits, labels):
