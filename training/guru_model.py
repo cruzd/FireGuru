@@ -78,7 +78,7 @@ def variable_summaries(var):
     tf.summary.scalar('min', tf.reduce_min(var))
     tf.summary.histogram('histogram', var)
 
-def nn_layer(input_tensor, input_dim, output_dim, layer_name, act=tf.nn.relu, name):
+def nn_layer(input_tensor, input_dim, output_dim, layer_name, act=tf.nn.relu):
     # Adding a name scope ensures logical grouping of the layers in the graph.
     with tf.name_scope(layer_name):
         # This Variable will hold the state of the weights for the layer
