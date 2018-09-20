@@ -88,6 +88,8 @@ def run_training(file):
             # Get tensors
             inputs = graph.get_tensor_by_name('features:0')
             predictions = graph.get_tensor_by_name('logits:0')
+            print(inputs)
+            print(predictions)
             # create tensors info
             model_input = tf.saved_model.utils.build_tensor_info(inputs)
             model_output = tf.saved_model.utils.build_tensor_info(predictions)
