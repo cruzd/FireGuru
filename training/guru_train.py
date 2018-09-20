@@ -91,13 +91,11 @@ def run_training(file):
             print(inputs)
             print(predictions)
             # create tensors info
-            model_input = tf.saved_model.utils.build_tensor_info(inputs)
-            model_output = tf.saved_model.utils.build_tensor_info(predictions)
-            print(model_input)
-            print(model_output)
+            #model_input = tf.saved_model.utils.build_tensor_info(inputs)
+            #model_output = tf.saved_model.utils.build_tensor_info(predictions)
             tf.saved_model.simple_save(sess,param.logs_dir + 'model_export', 
-                {"features": model_input}, 
-                {"binary_classif": model_output})
+                {"features": inputs}, 
+                {"binary_classif": predictions})
         # Export model and evaluate the model periodically.
         if (step + 1) == max_steps:
             # get the graph for this session
