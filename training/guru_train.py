@@ -22,7 +22,7 @@ def run_training(file):
     # Creates a variable to hold the global_step.
     global_step_tensor = tf.Variable(0, trainable=False, name='global_step')
     # Placeholders
-    features_placeholder = tf.placeholder(tf.float32, None, name="features")
+    features_placeholder = tf.placeholder(tf.float32, shape=[None, param.features_size], name="features")
     labels_placeholder = tf.placeholder(tf.float32, None, name="labels")
     # Build a Graph that computes predictions from the inference model.
     logits = model.inference(features_placeholder)
