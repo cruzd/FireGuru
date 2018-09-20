@@ -81,6 +81,19 @@ def run_training(file):
             print('Accuracy = %.3f; Recall = %.3f; Precision = %.3f' % (metrics[0], metrics[1], metrics[2]))
             sess.run(global_step_tensor.assign(global_step))
             saver.save(sess, param.logs_dir + 'model.ckpt', global_step=global_step)
+
+            
+            # get the graph for this session
+            graph = tf.get_default_graph()
+            # Get tensors
+            inputs = graph.get_tensor_by_name('features:0')
+            predictions = graph.get_tensor_by_name('logits:0')
+            # create tensors info
+            model_input = tf.saved_model.utils.build_tensor_info(inputs)
+            model_output = tf.saved_model.utils.build_tensor_info(predictions)
+            tf.saved_model.simple_save(sess,param.logs_dir + 'model_export', 
+                {"features": model_input}, 
+                {"binary_classif": model_output})
         # Export model and evaluate the model periodically.
         if (step + 1) == max_steps:
             # get the graph for this session
