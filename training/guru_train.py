@@ -93,6 +93,8 @@ def run_training(file):
             # create tensors info
             model_input = tf.saved_model.utils.build_tensor_info(inputs)
             model_output = tf.saved_model.utils.build_tensor_info(predictions)
+            print(model_input)
+            print(model_output)
             tf.saved_model.simple_save(sess,param.logs_dir + 'model_export', 
                 {"features": model_input}, 
                 {"binary_classif": model_output})
