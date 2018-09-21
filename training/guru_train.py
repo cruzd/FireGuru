@@ -86,8 +86,8 @@ def run_training(file):
             # Get the graph for this session
             graph = tf.get_default_graph()
             # Get tensors
-            inputs = graph.get_tensor_by_name('features:0')
-            predictions = graph.get_tensor_by_name('logits:0')
+            features = graph.get_tensor_by_name('features:0')
+            predictions = graph.get_tensor_by_name('predictions:0')
             tf.saved_model.simple_save(sess,param.logs_dir + 'model_export', 
-                {"features": inputs}, 
-                {"binary_classif": predictions})
+                {"features": features}, 
+                {"predictions": predictions})
