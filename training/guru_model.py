@@ -128,9 +128,9 @@ def make_predictions(logits):
 
 def evaluation_stats(logits, labels):
     predictions = make_predictions(logits)
-    recall, recall_op = tf.metrics.recall(tf.argmax(labels,1), predictions, name="my_metric")
-    precision, precision_op = tf.metrics.precision(tf.argmax(labels,1), predictions, name="my_metric")
-    accuracy, accuracy_op = tf.metrics.accuracy(tf.argmax(labels,1), predictions, name="my_metric")
+    , recall_op = tf.metrics.recall(tf.argmax(labels,1), predictions, name="my_metric")
+    , precision_op = tf.metrics.precision(tf.argmax(labels,1), predictions, name="my_metric")
+    , accuracy_op = tf.metrics.accuracy(tf.argmax(labels,1), predictions, name="my_metric")
     tf.summary.scalar('precision', precision_op*100)
     tf.summary.scalar('recall', recall_op*100)
     tf.summary.scalar('accuracy', accuracy_op*100)
