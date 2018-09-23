@@ -123,10 +123,10 @@ def training(loss):
     return train_op
 
 def make_predictions(logits):
-    softmax = tf.nn.softmax(logits)
+    # softmax = tf.nn.softmax(logits)
     # Get the predicted positions, index
-    #predicted = tf.argmax(logits, 1)
-    return softmax
+    predicted = tf.argmax(logits, 1)
+    return predicted
 
 def evaluation_stats(logits, labels):
     predictions = make_predictions(logits)
