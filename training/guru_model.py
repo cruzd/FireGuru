@@ -97,13 +97,22 @@ def nn_layer(input_tensor, input_dim, output_dim, layer_name, act=tf.nn.relu):
 
 def inference(features):
     layer_1 = nn_layer(features, get_num_features(), get_num_hidden1(), 'layer1', act=tf.nn.relu)
+<<<<<<< HEAD
     logits = nn_layer(layer_1, get_num_hidden1(), get_num_classes(), 'out', act=tf.identity)
+=======
+    logits = nn_layer(layer_1, get_num_hidden1(), get_num_classes(), 'out', act=tf.nn.relu)
+    # Rename logits tensors
+>>>>>>> d4caf28802f14c33d42d02ac37ec96574a378136
     logits = tf.identity(logits, name='predictions')
     return logits
 
 def loss(logits, labels):
     with tf.name_scope('cross_entropy'):
+<<<<<<< HEAD
         #diff = tf.nn.weighted_cross_entropy_with_logits(logits=logits, targets=labels, pos_weight=10000)
+=======
+        #diff = tf.nn.weighted_cross_entropy_with_logits(logits=logits, targets=labels, pos_wseight=10000)
+>>>>>>> d4caf28802f14c33d42d02ac37ec96574a378136
         diff = tf.nn.softmax_cross_entropy_with_logits_v2(logits=logits, labels=labels)
         with tf.name_scope('total'):
             cross_entropy = tf.reduce_mean(diff)
@@ -122,6 +131,10 @@ def training(loss):
     return train_op
 
 def make_predictions(logits):
+<<<<<<< HEAD
+=======
+    # softmax = tf.nn.softmax(logits)
+>>>>>>> d4caf28802f14c33d42d02ac37ec96574a378136
     # Get the predicted positions, index
     predicted = tf.argmax(logits, 1)
     return predicted
